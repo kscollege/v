@@ -1,86 +1,1279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ignore this, this is some random text for my personal work <svg class="cu" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0,0,256,256"><g class="path" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M43.75391,6.40234c-1.2177,-0.05335 -2.45911,0.31055 -3.48242,1.06641l-2.74609,2.02734l-12.52539,9.25977l-12.4082,-9.17187c-0.17292,-0.16897 -0.4012,-0.26957 -0.64258,-0.2832h0.25l-2.46484,-1.82422c-1.02397,-0.75773 -2.26723,-1.12367 -3.48633,-1.07031c-1.2191,0.05336 -2.4131,0.52522 -3.33984,1.43945c-1.17726,1.16068 -1.9082,2.78413 -1.9082,4.56445v3.43359c-0.01457,0.09777 -0.01457,0.19715 0,0.29492v23.36133c0,1.92119 1.57881,3.5 3.5,3.5h7.5c0.55226,-0.00006 0.99994,-0.44774 1,-1v-16.62695l11.40625,8.43164c0.353,0.26043 0.8345,0.26043 1.1875,0l11.40625,-8.43164v16.62695c0.00006,0.55226 0.44774,0.99994 1,1h7.5c1.92119,0 3.5,-1.57881 3.5,-3.5v-23.38086c0.01129,-0.08622 0.01129,-0.17355 0,-0.25977v-3.44922c0,-1.75846 -0.70954,-3.37437 -1.87109,-4.53711c-0.03357,-0.03357 -0.04482,-0.04287 -0.03125,-0.0293c-0.00194,-0.00196 -0.0039,-0.00391 -0.00586,-0.00586c-0.92656,-0.91221 -2.12019,-1.3822 -3.33789,-1.43555zM43.64453,8.40039c0.7563,0.02965 1.48952,0.3165 2.04492,0.86328c0.01891,0.01867 0.03272,0.03277 0.02344,0.02344c0.79645,0.79726 1.28711,1.9015 1.28711,3.12305v3.08594l-8,5.91211v-10.4082c0.00042,-0.0339 -0.00088,-0.0678 -0.00391,-0.10156l2.46289,-1.82031c0.00065,0 0.0013,0 0.00195,0c0.64864,-0.47915 1.42729,-0.70739 2.18359,-0.67773zM6.35742,8.40625c0.75715,-0.02964 1.53847,0.19746 2.1875,0.67773l2.45898,1.81836c-0.00289,0.03247 -0.0042,0.06506 -0.00391,0.09766v10.4082l-8,-5.91211v-3.08594c0,-1.23567 0.50176,-2.3413 1.3125,-3.14062c0.55526,-0.54776 1.28777,-0.83364 2.04492,-0.86328zM37,12.37109v10.51563l-12,8.86914l-12,-8.86914v-10.51367l11.40625,8.43164c0.353,0.26043 0.8345,0.26043 1.1875,0zM3,17.98242l8,5.91406v17.10352h-6.5c-0.84081,0 -1.5,-0.65919 -1.5,-1.5zM47,17.98242v21.51758c0,0.84081 -0.65919,1.5 -1.5,1.5h-6.5v-17.10352z"></path></g></g></svg>bdhhdbdbshdbdbdbhsvsvvdvdvvdvdhsjjsjsbsbsbsjhsjsnsnsnnsnnsnsnsnnsnznznznnznzngdhsksjsvvdhzbsbsvzhzbvsbsbzbbsvvshshvsvshbbsbsbsbbsbzbbxbdbbsbdbgdhsiehvddjhsnsndhdjbsnrbdjsjbsevbdbsnnsbdsbzbkzhs -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="weblogo16.svg" sizes="16x16" type="image/svg">
-    <link rel="icon" href="weblogo32.svg" sizes="32x32" type="image/svg">
-    <link rel="icon" href="weblogo48.svg" sizes="48x48" type="image/svg">
-    <link rel="icon" href="weblogo96.svg" sizes="96x96" type="image/svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Lato -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Montserrat -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Quicksand -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">  <!-- Bodoni Moda -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">  <!-- Merienda -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">  <!-- Gruppo , Tangerine -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gruppo&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">  <!-- EB Garamond , Mr De Haviland , Parisienne -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Mr+De+Haviland&family=Parisienne&display=swap" rel="stylesheet">
-    <title>Parallel Frames</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parallel Frames — by vishaloriginals</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    /* =====================
+       CSS VARIABLES & RESET
+    ===================== */
+    :root {
+      --bg:        #0d0d0d;
+      --bg2:       #131313;
+      --surface:   #1a1a1a;
+      --border:    rgba(255,255,255,0.07);
+      --accent:    #c8a96e;
+      --accent2:   #e8c98e;
+      --text:      #f0ede8;
+      --muted:     #888;
+      --radius:    14px;
+      --trans:     0.35s cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* =====================
+       LOADING SCREEN
+    ===================== */
+    #loader {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 9999;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    #loader.hide { opacity: 0; visibility: hidden; }
+
+    .loader-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -.02em;
+      color: var(--accent);
+      animation: loaderPulse 1.4s ease-in-out infinite;
+    }
+
+    .loader-bar {
+      margin-top: 24px;
+      width: 140px; height: 2px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .loader-bar::after {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--accent);
+      border-radius: 99px;
+      animation: loaderBar 1.6s ease forwards;
+    }
+
+    @keyframes loaderPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+    @keyframes loaderBar {
+      to { width: 100%; }
+    }
+
+    /* =====================
+       NAVBAR
+    ===================== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 5%;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(13,13,13,.72);
+      backdrop-filter: blur(18px) saturate(160%);
+      border-bottom: 1px solid var(--border);
+      transition: var(--trans);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -.02em;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo span { color: var(--text); }
+
+    .nav-links {
+      display: flex; gap: 6px; align-items: center;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 99px;
+      transition: var(--trans);
+    }
+    .nav-links a:hover { color: var(--text); background: var(--surface); }
+
+    .nav-creator-btn {
+      background: var(--accent) !important;
+      color: var(--bg) !important;
+      font-weight: 600 !important;
+      padding: 9px 20px !important;
+    }
+    .nav-creator-btn:hover {
+      background: var(--accent2) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(200,169,110,.3) !important;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text); border-radius: 99px;
+      transition: var(--trans);
+    }
+
+    /* =====================
+       HERO SECTION
+    ===================== */
+    #home {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* background grain + radial glow */
+    #home::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 40%, rgba(200,169,110,.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,169,110,.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    #home::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; opacity: .5;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(200,169,110,.1);
+      border: 1px solid rgba(200,169,110,.22);
+      padding: 6px 18px;
+      border-radius: 99px;
+      margin-bottom: 28px;
+      animation: fadeUp .8s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.06;
+      letter-spacing: -.03em;
+      margin-bottom: 22px;
+      animation: fadeUp .9s .1s ease both;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      max-width: 560px;
+      font-size: clamp(.95rem, 2vw, 1.1rem);
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      animation: fadeUp 1s .2s ease both;
+    }
+
+    .hero-actions {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 1.1s .3s ease both;
+    }
+
+    /* =====================
+       BUTTON STYLES
+    ===================== */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px;
+      border-radius: 99px;
+      font-size: .9rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: var(--trans);
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .btn-primary:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(200,169,110,.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: var(--surface);
+      color: var(--text);
+    }
+    .btn-ghost:hover {
+      background: #222;
+      transform: translateY(-2px);
+    }
+
+    /* =====================
+       SECTION COMMONS
+    ===================== */
+    section {
+      padding: 100px 5%;
+    }
+
+    .section-label {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 300;
+      margin-bottom: 52px;
+    }
+
+    .price-tag {
+      display: inline-block;
+      background: rgba(200,169,110,.12);
+      border: 1px solid rgba(200,169,110,.2);
+      color: var(--accent);
+      font-size: .85rem;
+      font-weight: 600;
+      padding: 5px 16px;
+      border-radius: 99px;
+      margin-bottom: 16px;
+    }
+
+    /* =====================
+       DIVIDER
+    ===================== */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 0 5%;
+      width: 90%;
+    }
+
+    /* =====================
+       SKETCHES SECTION
+    ===================== */
+    #sketches { background: var(--bg); }
+
+    .sketches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 44px;
+    }
+
+    .sketch-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: var(--trans);
+      cursor: pointer;
+      position: relative;
+    }
+    .sketch-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(200,169,110,.35);
+      box-shadow: 0 24px 56px rgba(0,0,0,.5), 0 0 0 1px rgba(200,169,110,.15);
+    }
+
+    .sketch-card img {
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+      filter: grayscale(20%) contrast(1.05);
+    }
+    .sketch-card:hover img {
+      transform: scale(1.06);
+      filter: grayscale(0%) contrast(1.1);
+    }
+
+    .sketch-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 55%);
+      opacity: 0; transition: var(--trans);
+      display: flex; align-items: flex-end;
+      padding: 18px;
+    }
+    .sketch-card:hover .sketch-overlay { opacity: 1; }
+
+    .sketch-overlay span {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .06em;
+    }
+
+    /* =====================
+       WEBSITES SECTION
+    ===================== */
+    #websites { background: var(--bg2); }
+
+    .web-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 44px;
+    }
+
+    .web-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: var(--trans);
+      position: relative;
+    }
+    .web-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(200,169,110,.3);
+      box-shadow: 0 28px 64px rgba(0,0,0,.55);
+    }
+
+    .web-mockup-bar {
+      background: #111;
+      padding: 10px 14px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #ffbd2e; }
+    .dot-g { background: #28ca41; }
+
+    .web-card img {
+      width: 100%; aspect-ratio: 16/10;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+    }
+    .web-card:hover img { transform: scale(1.04); }
+
+    .web-card-body { padding: 16px 18px; }
+    .web-card-body h4 {
+      font-size: .92rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .web-card-body p {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    /* =====================
+       PRESETS SECTION
+    ===================== */
+    #presets { background: var(--bg); }
+
+    .presets-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .presets-visual {
+      position: relative;
+    }
+
+    .presets-swatches {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .swatch {
+      aspect-ratio: 1;
+      border-radius: 10px;
+      transition: var(--trans);
+      cursor: pointer;
+    }
+    .swatch:hover { transform: scale(1.1); }
+
+    .swatch-before {
+      grid-column: 1 / 3;
+      aspect-ratio: 4/3;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    .swatch-after {
+      grid-column: 3 / 5;
+      aspect-ratio: 4/3;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .swatch-before img, .swatch-after img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .swatch-before::after {
+      content: 'Before';
+      position: absolute; bottom: 8px; left: 10px;
+      font-size: .7rem; font-weight: 600;
+      color: #fff; background: rgba(0,0,0,.5);
+      padding: 2px 8px; border-radius: 99px;
+    }
+
+    .presets-text {}
+
+    .preset-features {
+      list-style: none;
+      margin: 24px 0 36px;
+    }
+    .preset-features li {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .92rem;
+      color: var(--muted);
+    }
+    .preset-features li i { color: var(--accent); width: 16px; }
+
+    /* =====================
+       MESSAGE FORM
+    ===================== */
+    #message { background: var(--bg2); }
+
+    .form-wrap {
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .form-group { margin-bottom: 18px; }
+
+    .form-group label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      outline: none;
+      transition: var(--trans);
+      resize: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: #444; }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      background: #1f1f1f;
+      box-shadow: 0 0 0 3px rgba(200,169,110,.1);
+    }
+
+    .form-group textarea { height: 130px; }
+
+    .form-status {
+      font-size: .85rem;
+      margin-top: 10px;
+      min-height: 20px;
+      font-weight: 500;
+      transition: var(--trans);
+    }
+    .form-status.success { color: #4caf88; }
+    .form-status.error   { color: #e07070; }
+
+    /* =====================
+       CONTACT SECTION
+    ===================== */
+    #contact { background: var(--bg); padding: 80px 5%; }
+
+    .contact-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .contact-card {
+      flex: 1 1 200px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      display: flex; flex-direction: column;
+      align-items: flex-start; gap: 14px;
+      text-decoration: none;
+      color: var(--text);
+      transition: var(--trans);
+    }
+    .contact-card:hover {
+      border-color: rgba(200,169,110,.35);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.4);
+      background: #1f1f1f;
+    }
+
+    .contact-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(200,169,110,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      color: var(--accent);
+      transition: var(--trans);
+    }
+    .contact-card:hover .contact-icon {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .contact-card h4 { font-size: .92rem; font-weight: 600; }
+    .contact-card p  { font-size: .78rem; color: var(--muted); word-break: break-all; }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      background: #0a0a0a;
+      border-top: 1px solid var(--border);
+      padding: 48px 5%;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand {}
+    .footer-brand .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -.02em;
+    }
+    .footer-brand p {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .footer-links {
+      display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: .8rem;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      transition: var(--trans);
+    }
+    .footer-links a:hover { color: var(--accent); border-color: rgba(200,169,110,.3); }
+
+    .footer-bottom {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex; flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    /* =====================
+       MODAL
+    ===================== */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.7);
+      backdrop-filter: blur(10px);
+      z-index: 500;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity .3s ease, visibility .3s ease;
+      padding: 20px;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 44px;
+      max-width: 400px; width: 100%;
+      position: relative;
+      transform: scale(.92) translateY(20px);
+      transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+      text-align: center;
+    }
+    .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+
+    .modal-close {
+      position: absolute; top: 16px; right: 18px;
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: 1.2rem; transition: var(--trans);
+    }
+    .modal-close:hover { color: var(--text); }
+
+    .modal-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #8b6030);
+      margin: 0 auto 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      border: 3px solid rgba(200,169,110,.3);
+    }
+
+    .modal h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .modal-handle {
+      font-size: .82rem;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .modal-role {
+      display: inline-block;
+      background: rgba(200,169,110,.1);
+      border: 1px solid rgba(200,169,110,.2);
+      color: var(--accent);
+      font-size: .77rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 99px;
+      margin-bottom: 18px;
+    }
+
+    .modal p {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .modal-social {
+      display: flex; gap: 10px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .modal-social a {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: .9rem;
+      text-decoration: none; transition: var(--trans);
+    }
+    .modal-social a:hover { color: var(--accent); border-color: rgba(200,169,110,.3); }
+
+    /* =====================
+       TOAST
+    ===================== */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-size: .875rem;
+      font-weight: 500;
+      z-index: 1000;
+      opacity: 0;
+      transition: all .4s cubic-bezier(.34,1.56,.64,1);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .toast.success { border-color: rgba(76,175,136,.35); }
+    .toast.error   { border-color: rgba(224,112,112,.35); }
+
+    /* =====================
+       SCROLL ANIMATIONS
+    ===================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =====================
+       MOBILE NAV
+    ===================== */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 68px; left: 0; right: 0;
+        background: rgba(13,13,13,.97);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 20px 5% 28px;
+        gap: 4px;
+        transform: translateY(-110%);
+        transition: transform .35s ease;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.open { transform: translateY(0); }
+      .nav-links a { width: 100%; border-radius: var(--radius); }
+      .hamburger { display: flex; }
+
+      .presets-inner { grid-template-columns: 1fr; }
+      .sketches-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .modal { padding: 32px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .sketches-grid { grid-template-columns: 1fr 1fr; }
+      .web-cards { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <svg class="llamabox" width="86" height="99" viewBox="0 0 86 99" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g id="llama">
-            <g id="outer">
-                <g id="shadow">
-                    <path d="M65.1471 82.281L42.9364 94.8775C42.9364 94.8775 24.7752 85.2869 24.6926 84.653C22.6264 65.9422 22.0479 61.3616 22.6264 42.2214C22.6264 42.2214 15.6636 34.9007 18.1016 28.766C20.5397 22.6313 23.6595 17.8258 28.1843 18.6437C32.7091 19.4617 29.8992 22.3245 28.7628 25.4736C27.6264 28.6228 25.7256 33.5305 27.8537 37.743C27.8537 37.743 31.2422 35.964 34.7752 33.9805C38.2073 32.2917 42.097 31.7396 45.8702 32.4059C45.8702 32.4059 51.7587 33.3056 53.9281 35.0847C53.9281 35.0847 57.0479 34.3485 55.4157 27.4163C53.7835 20.4841 49.9818 20.0548 53.3496 17.3964C56.7173 14.738 61.0355 19.2368 62.2339 21.752C63.4813 24.7825 63.8445 28.0985 63.282 31.3231C62.7195 34.5477 61.254 37.5514 59.0521 39.9925C59.0521 39.9925 61.9653 54.8385 63.019 62.4864C64.0727 70.1343 65.0851 79.7862 65.0851 82.3832" fill="white" />
-                </g>
-                <path d="M58.9637 39.8485C58.9637 39.8485 63.8234 42.3285 60.8083 50.851Z" fill="white" />
-                <path d="M22.6678 42.1806C22.6678 42.1806 17.957 46.7029 22.6678 54.1054Z" fill="white" />
-                <g id="head">
-                    <path d="M65.1471 82.281L42.9364 94.8775C42.9364 94.8775 24.7752 85.2869 24.6926 84.653C22.6264 65.9422 22.0479 61.3616 22.6264 42.2214C22.6264 42.2214 15.6636 34.9007 18.1016 28.766C20.5397 22.6313 23.6595 17.8258 28.1843 18.6437C32.7091 19.4617 29.8992 22.3245 28.7628 25.4736C27.6264 28.6228 25.7256 33.5305 27.8537 37.743C27.8537 37.743 31.2422 35.964 34.7752 33.9805C38.2073 32.2917 42.097 31.7396 45.8702 32.4059C45.8702 32.4059 51.7587 33.3056 53.9281 35.0847C53.9281 35.0847 57.0479 34.3485 55.4157 27.4163C53.7835 20.4841 49.9818 20.0548 53.3496 17.3964C56.7173 14.738 61.0355 19.2368 62.2339 21.752C63.4813 24.7825 63.8445 28.0985 63.282 31.3231C62.7195 34.5477 61.254 37.5514 59.0521 39.9925C59.0521 39.9925 61.9653 54.8385 63.019 62.4864C64.0727 70.1343 65.0851 79.7862 65.0851 82.3832" fill="white" />
-                    <path d="M58.9637 39.8485C58.9637 39.8485 63.8234 42.3285 60.8083 50.851Z" fill="white" />
-                    <path d="M22.6678 42.1806C22.6678 42.1806 17.957 46.7029 22.6678 54.1054Z" fill="white" />
-                    <g id="bolt">
-                        <path d="M39.362 31.0768C39.4109 31.097 39.4527 31.131 39.4822 31.1747C39.5116 31.2183 39.5273 31.2697 39.5273 31.3222L38.5355 36.9865C38.5355 37.2932 39.0107 37.375 39.2587 37.1296L46.9033 29.4817C46.9374 29.4593 46.9653 29.4289 46.9847 29.3932C47.004 29.3576 47.0142 29.3178 47.0142 29.2773C47.0142 29.2368 47.004 29.1969 46.9847 29.1612C46.9653 29.1255 46.9374 29.0951 46.9033 29.0727L42.0686 27.0278C42.0158 27.0135 41.97 26.9808 41.9396 26.9357C41.9093 26.8906 41.8964 26.8362 41.9033 26.7824L42.895 21.0977C42.895 20.791 42.4198 20.7092 42.1512 20.975L34.4859 28.6229C34.4519 28.6453 34.4239 28.6757 34.4045 28.7114C34.3852 28.7471 34.3751 28.7869 34.3751 28.8273C34.3751 28.8678 34.3852 28.9077 34.4045 28.9434C34.4239 28.9791 34.4519 29.0095 34.4859 29.0319L39.362 31.0768Z" fill="white" />
-                    </g>
-                </g>
-                <g id="lefteye">
-                    <g id="innerleft">
-                        <path d="M29.9835 58.1644C32.928 58.1644 35.315 55.0624 35.315 51.2359C35.315 47.4094 32.928 44.3074 29.9835 44.3074C27.0391 44.3074 24.6521 47.4094 24.6521 51.2359C24.6521 55.0624 27.0391 58.1644 29.9835 58.1644Z" fill="black" />
-                    </g>
-                    <g>
-                        <ellipse cx="31.4181" cy="48.186" rx="1.03227" ry="1.78873" transform="rotate(-14.0096 31.4181 48.186)" fill="white" />
-                    </g>
-                </g>
-                <g id="righteye">
-                    <g id="innerright">
-                        <path d="M56.057 55.8558C58.7525 55.0747 60.0982 51.604 59.0628 48.104C58.0274 44.6041 55.0029 42.4002 52.3075 43.1813C49.612 43.9624 48.2663 47.4328 49.3017 50.9327C50.3371 54.4326 53.3616 56.6369 56.057 55.8558Z" fill="black" />
-                    </g>
-                    <g>
-                        <ellipse cx="55.6675" cy="46.8496" rx="1.05728" ry="1.66151" transform="rotate(-16.4797 55.6675 46.8496)" fill="white" />
-                    </g>
-                </g>
-                <g id="mouth">
-                    <g id="mouthshadow">
-                        <path d="M44.8406 69.9739C48.9927 69.2167 51.6178 64.6232 50.7038 59.7141C49.7899 54.8049 45.683 51.439 41.5309 52.1962C37.3788 52.9534 34.7538 57.547 35.6677 62.4561C36.5816 67.3653 40.6884 70.7311 44.8406 69.9739Z" fill="#E2DEFF" />
-                    </g>
-                    <path d="M44.8406 69.9739C48.9927 69.2167 51.6178 64.6232 50.7038 59.7141C49.7899 54.8049 45.683 51.439 41.5309 52.1962C37.3788 52.9534 34.7538 57.547 35.6677 62.4561C36.5816 67.3653 40.6884 70.7311 44.8406 69.9739Z" fill="#E2DEFF" />
-                    <g id="mouthinner">
-                        <g id="innerwrap">
-                            <path d="M48.6182 61.3208C48.3414 61.2377 48.0428 61.2663 47.7873 61.4004C47.5318 61.5345 47.3403 61.7631 47.2545 62.0365C47.1695 62.2916 47.0345 62.5278 46.8573 62.7313C46.68 62.9348 46.4639 63.1017 46.2215 63.2225C45.8852 63.284 45.5399 63.2776 45.2062 63.2038C44.8724 63.13 44.5572 62.9903 44.2793 62.7931L44.0314 60.9937L45.3331 59.235C45.7669 58.6419 45.643 57.7422 44.8165 57.8854C43.9901 58.0285 44.1554 59.0919 42.7504 59.3168C41.3454 59.5418 41.2008 58.4579 40.3537 58.601C39.5066 58.7442 39.6925 59.6235 40.3537 60.053L41.9653 61.2186L42.2339 63.1408C42.0763 63.3733 41.8721 63.5714 41.6339 63.7226C41.3958 63.8739 41.1289 63.9751 40.8496 64.0201C40.3633 64.0024 39.9034 63.7968 39.5686 63.4474C39.4686 63.3473 39.3496 63.2678 39.2184 63.2135C39.0871 63.1593 38.9463 63.1313 38.8041 63.1313C38.6619 63.1313 38.5211 63.1593 38.3899 63.2135C38.2586 63.2678 38.1396 63.3473 38.0397 63.4474C37.9378 63.5481 37.857 63.6677 37.8019 63.7993C37.7468 63.9309 37.7184 64.0718 37.7184 64.2143C37.7184 64.3567 37.7468 64.4978 37.8019 64.6294C37.857 64.761 37.9378 64.8805 38.0397 64.9811C38.4215 65.3883 38.8855 65.7115 39.4015 65.9299C39.9176 66.1483 40.4743 66.257 41.0355 66.2489C41.1863 66.2702 41.3393 66.2702 41.4901 66.2489C42.2967 66.0297 43.0172 65.5735 43.5562 64.9403C44.4586 65.4675 45.5123 65.6833 46.5521 65.5537C46.7432 65.5182 46.9301 65.4633 47.1099 65.3901C47.6778 65.1563 48.1858 64.8 48.5969 64.3472C49.0079 63.8944 49.3117 63.3565 49.4859 62.7727C49.5473 62.6214 49.5727 62.4581 49.5602 62.2956C49.5477 62.133 49.4975 61.9754 49.4136 61.835C49.3298 61.6947 49.2144 61.5753 49.0765 61.4862C48.9385 61.397 48.7817 61.3404 48.6182 61.3208Z" fill="black" />
-                        </g>
-                    </g>
-                </g>
-            </g>
-        </g>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M42.895 4.92249C43.4565 4.99008 43.998 5.17106 44.4859 5.45418L80.1264 26.2304C80.6927 26.5311 81.1537 26.9945 81.4487 27.5595C81.746 28.0433 81.923 28.59 81.9653 29.1546V70.6456C81.923 71.2102 81.746 71.7569 81.4487 72.2406C81.1537 72.8057 80.6927 73.269 80.1264 73.5697L44.5686 94.346C44.1093 94.6869 43.5518 94.8732 42.9777 94.8776C42.4026 94.8791 41.8432 94.6923 41.3868 94.346L5.87023 73.5697C5.29557 73.2802 4.8315 72.8138 4.54791 72.2406C4.24413 71.7584 4.06005 71.2118 4.01074 70.6456V29.1137C3.96663 28.5682 4.05886 28.0204 4.27931 27.5186C4.45404 27.3387 4.6004 27.1589 4.73838 26.9893C5.00829 26.6577 5.24615 26.3654 5.60162 26.1895L41.3868 5.43371C41.8436 5.15179 42.3595 4.97693 42.895 4.92249ZM7.14788 28.9871L7.14799 28.9885V70.4471C7.1599 70.4956 7.17965 70.5423 7.20685 70.5855L7.29216 70.7209L7.3376 70.8127L7.37642 70.8323L42.9777 91.6581L78.5913 70.8492L78.6481 70.819C78.6571 70.8142 78.662 70.8083 78.6642 70.804L78.7145 70.7076L78.7714 70.615C78.7984 70.571 78.8174 70.5234 78.828 70.4741V29.3261C78.8174 29.2768 78.7984 29.2291 78.7714 29.1852L78.7145 29.0925L78.6642 28.9962C78.662 28.9919 78.6571 28.9859 78.6481 28.9811L78.5932 28.952L42.9187 8.15588L7.27804 28.8278C7.26154 28.8477 7.2425 28.871 7.21974 28.8989C7.20946 28.9115 7.19746 28.9262 7.18427 28.9424C7.1729 28.9564 7.16065 28.9714 7.14788 28.9871Z" fill="url(#paint2_linear_1_2)" />
-    </svg>
-<script src="script.js"></script>
+
+<!-- ===================== LOADER ===================== -->
+<div id="loader">
+  <div class="loader-logo">Parallel Frames</div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    Parallel <span>Frames</span>
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#sketches">Sketches</a></li>
+    <li><a href="#websites">Websites</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#" class="nav-creator-btn" onclick="openModal(); return false;">Creator</a></li>
+  </ul>
+
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section id="home">
+  <div class="hero-tag">✦ Art · Design · Web</div>
+
+  <h1 class="hero-title">
+    Where Every Frame<br/>
+    Tells a <em>Story.</em>
+  </h1>
+
+  <p class="hero-sub">
+    Hand-crafted pencil sketches, premium web design, and free Lightroom presets — all in one creative studio. From your imagination to reality.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#sketches" class="btn btn-primary">
+      <i class="fas fa-pencil-alt"></i> Explore Work
+    </a>
+    <a href="#" class="btn btn-outline" onclick="openModal(); return false;">
+      <i class="fas fa-user-circle"></i> Meet the Creator
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===================== SKETCHES ===================== -->
+<section id="sketches">
+  <div class="reveal">
+    <span class="section-label">✦ Handcrafted Art</span>
+    <h2 class="section-title">Custom Pencil Sketches</h2>
+    <div class="price-tag">Starting at ₹200</div>
+    <p class="section-sub">Every stroke is personal. Commission a portrait or scene, hand-drawn with love.</p>
+  </div>
+
+  <div class="sketches-grid reveal">
+    <!-- Sketch Card 1 -->
+    <div class="sketch-card">
+      <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=530&fit=crop&q=80" alt="Pencil Sketch 1" loading="lazy"/>
+      <div class="sketch-overlay"><span>Portrait Sketch</span></div>
+    </div>
+    <!-- Sketch Card 2 -->
+    <div class="sketch-card">
+      <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=400&h=530&fit=crop&q=80" alt="Pencil Sketch 2" loading="lazy"/>
+      <div class="sketch-overlay"><span>Couple Portrait</span></div>
+    </div>
+    <!-- Sketch Card 3 -->
+    <div class="sketch-card">
+      <img src="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?w=400&h=530&fit=crop&q=80" alt="Pencil Sketch 3" loading="lazy"/>
+      <div class="sketch-overlay"><span>Character Art</span></div>
+    </div>
+    <!-- Sketch Card 4 -->
+    <div class="sketch-card">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=530&fit=crop&q=80" alt="Pencil Sketch 4" loading="lazy"/>
+      <div class="sketch-overlay"><span>Scenery Sketch</span></div>
+    </div>
+  </div>
+
+  <div class="reveal" style="text-align:center;">
+    <a href="https://www.instagram.com/vishaloriginals" target="_blank" class="btn btn-primary">
+      <i class="fas fa-paint-brush"></i> Get Your Sketch Now
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===================== WEBSITES ===================== -->
+<section id="websites">
+  <div class="reveal">
+    <span class="section-label">✦ Web Design</span>
+    <h2 class="section-title">Own a Custom Website</h2>
+    <div class="price-tag">Starting at just ₹400</div>
+    <p class="section-sub">Modern, responsive, and beautifully crafted websites built for you.</p>
+  </div>
+
+  <div class="web-cards reveal">
+    <!-- Web Card 1 -->
+    <div class="web-card">
+      <div class="web-mockup-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=360&fit=crop&q=80" alt="Website Mockup 1" loading="lazy"/>
+      <div class="web-card-body">
+        <h4>Portfolio Website</h4>
+        <p>Personal branding & showcase</p>
+      </div>
+    </div>
+    <!-- Web Card 2 -->
+    <div class="web-card">
+      <div class="web-mockup-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=360&fit=crop&q=80" alt="Website Mockup 2" loading="lazy"/>
+      <div class="web-card-body">
+        <h4>Business Landing Page</h4>
+        <p>Convert visitors to clients</p>
+      </div>
+    </div>
+    <!-- Web Card 3 -->
+    <div class="web-card">
+      <div class="web-mockup-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=360&fit=crop&q=80" alt="Website Mockup 3" loading="lazy"/>
+      <div class="web-card-body">
+        <h4>Creative Studio Site</h4>
+        <p>Showcase your creative work</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal" style="text-align:center;">
+    <a href="#message" class="btn btn-primary">
+      <i class="fas fa-laptop-code"></i> Order Your Website
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===================== PRESETS ===================== -->
+<section id="presets">
+  <div class="presets-inner">
+    <!-- Visual side -->
+    <div class="presets-visual reveal">
+      <div class="presets-swatches">
+        <div class="swatch-before">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=280&fit=crop&q=80" alt="Before preset"/>
+          <div style="position:absolute;bottom:8px;left:10px;font-size:.7rem;font-weight:600;color:#fff;background:rgba(0,0,0,.55);padding:2px 8px;border-radius:99px;">Before</div>
+        </div>
+        <div class="swatch-after" style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=280&fit=crop&q=80" alt="After preset" style="filter:saturate(1.35) contrast(1.1) brightness(1.05) sepia(.12)"/>
+          <div style="position:absolute;bottom:8px;left:10px;font-size:.7rem;font-weight:600;color:#fff;background:rgba(200,169,110,.7);padding:2px 8px;border-radius:99px;">After</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px;">
+        <div class="swatch" style="background:linear-gradient(135deg,#c8a96e,#8b6030);height:52px;"></div>
+        <div class="swatch" style="background:linear-gradient(135deg,#5b8fa8,#2a4a5e);height:52px;"></div>
+        <div class="swatch" style="background:linear-gradient(135deg,#8fba8a,#3d6b38);height:52px;"></div>
+        <div class="swatch" style="background:linear-gradient(135deg,#c07a7a,#6b2a2a);height:52px;"></div>
+      </div>
+    </div>
+
+    <!-- Text side -->
+    <div class="presets-text reveal">
+      <span class="section-label">✦ Free Download</span>
+      <h2 class="section-title">Lightroom Presets</h2>
+      <p style="color:var(--muted);font-size:.95rem;line-height:1.8;">
+        Level up your photography instantly. Professional-grade Lightroom presets crafted by Vishal — completely free for everyone.
+      </p>
+
+      <ul class="preset-features">
+        <li><i class="fas fa-check-circle"></i> 10+ handcrafted presets</li>
+        <li><i class="fas fa-check-circle"></i> Works on mobile & desktop Lightroom</li>
+        <li><i class="fas fa-check-circle"></i> Cinematic, portrait, & travel styles</li>
+        <li><i class="fas fa-check-circle"></i> One-click instant enhancement</li>
+        <li><i class="fas fa-check-circle"></i> 100% free, always</li>
+      </ul>
+
+      <a href="https://drive.google.com/drive/folders/1ytgz2U7-uEDARb7AKjvJUDVGG2mSzJlM" target="_blank" class="btn btn-primary">
+        <i class="fas fa-download"></i> Download Presets Free
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===================== MESSAGE FORM ===================== -->
+<section id="message">
+  <div class="reveal" style="text-align:center;margin-bottom:52px;">
+    <span class="section-label">✦ Get In Touch</span>
+    <h2 class="section-title">Leave a Message</h2>
+    <p style="color:var(--muted);font-size:.95rem;">Have a question or project in mind? Drop a message below.</p>
+  </div>
+
+  <div class="form-wrap reveal">
+    <div class="form-group">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" placeholder="e.g. Rahul Sharma" />
+    </div>
+
+    <div class="form-group">
+      <label for="msg">Your Message</label>
+      <textarea id="msg" placeholder="Tell me about your project or question..."></textarea>
+    </div>
+
+    <button class="btn btn-primary" id="sendBtn" onclick="sendMessage()" style="width:100%;justify-content:center;">
+      <i class="fas fa-paper-plane"></i> Send Message
+    </button>
+    <div class="form-status" id="formStatus"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" style="padding:80px 5%;">
+  <div class="reveal">
+    <span class="section-label">✦ Connect</span>
+    <h2 class="section-title">Find Me Online</h2>
+  </div>
+
+  <div class="contact-cards reveal">
+    <a href="https://www.instagram.com/vishaloriginals?igsh=NG9wdTlsNzV3dW04" target="_blank" class="contact-card">
+      <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+      <h4>Instagram</h4>
+      <p>@vishaloriginals</p>
+    </a>
+
+    <a href="mailto:originalsvishal@gmail.com" class="contact-card">
+      <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+      <h4>Gmail</h4>
+      <p>originalsvishal@gmail.com</p>
+    </a>
+
+    <a href="https://t.me/vishaloriginals" target="_blank" class="contact-card">
+      <div class="contact-icon"><i class="fab fa-telegram"></i></div>
+      <h4>Telegram</h4>
+      <p>@vishaloriginals</p>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">Parallel Frames</div>
+      <p>A website by vishaloriginals</p>
+      <p style="margin-top:4px;font-size:.75rem;">📍 Jharkhand, India</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#" onclick="openModal(); return false;">About Creator</a>
+      <a href="#" onclick="showTerms(); return false;">Terms & Conditions</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2024 Parallel Frames LTD — A website by vishaloriginals</span>
+    <span>
+      <a href="mailto:originalsvishal@gmail.com" style="color:var(--accent);text-decoration:none;">originalsvishal@gmail.com</a>
+    </span>
+  </div>
+</footer>
+
+<!-- ===================== CREATOR MODAL ===================== -->
+<div class="modal-overlay" id="creatorModal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+
+    <div class="modal-avatar">✦</div>
+
+    <h2>Vishal</h2>
+    <span class="modal-handle">@vishaloriginals</span>
+    <span class="modal-role">Designer & Developer</span>
+
+    <p>
+      A passionate self-taught designer and developer from Jharkhand, India. Vishal crafts everything from hand-drawn pencil portraits to pixel-perfect websites — blending traditional artistry with modern digital design. Every creation is intentional, personal, and made with care.
+    </p>
+
+    <div class="modal-social">
+      <a href="https://www.instagram.com/vishaloriginals" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://t.me/vishaloriginals" target="_blank"><i class="fab fa-telegram"></i></a>
+      <a href="mailto:originalsvishal@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TOAST ===================== -->
+<div class="toast" id="toast"></div>
+
+<!-- ===================== JAVASCRIPT ===================== -->
+<script>
+  /* ---- LOADER ---- */
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hide');
+    }, 1800);
+  });
+
+  /* ---- MOBILE NAV TOGGLE ---- */
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Close nav on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  /* ---- CREATOR MODAL ---- */
+  function openModal() {
+    document.getElementById('creatorModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e) {
+    if (!e || e.target === document.getElementById('creatorModal') || e.target.closest('.modal-close')) {
+      document.getElementById('creatorModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  /* ---- TOAST ---- */
+  function showToast(msg, type = '') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast ' + type;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3200);
+  }
+
+  /* ---- TELEGRAM MESSAGE SEND ---- */
+  async function sendMessage() {
+    const BOT_TOKEN = '6595523271:AAFMCKyKyDJSTcOYSQvY3ok4feu1mTIBhSI';
+    const CHAT_ID   = '5719914218';
+
+    const name = document.getElementById('name').value.trim();
+    const msg  = document.getElementById('msg').value.trim();
+    const btn  = document.getElementById('sendBtn');
+    const status = document.getElementById('formStatus');
+
+    if (!name || !msg) {
+      showToast('Please fill in all fields.', 'error');
+      return;
+    }
+
+    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Sending...';
+    btn.disabled = true;
+    status.textContent = '';
+
+    const text = `📩 New message from ${name}:\n\n${msg}\n\n— via Parallel Frames`;
+
+    try {
+      const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: CHAT_ID, text })
+      });
+
+      const data = await res.json();
+
+      if (data.ok) {
+        showToast('✓ Message sent successfully!', 'success');
+        status.className = 'form-status success';
+        status.textContent = '✓ Message delivered to Vishal!';
+        document.getElementById('name').value = '';
+        document.getElementById('msg').value = '';
+      } else {
+        throw new Error(data.description || 'Failed');
+      }
+    } catch (err) {
+      showToast('Failed to send. Try again.', 'error');
+      status.className = 'form-status error';
+      status.textContent = '✗ Something went wrong. Please try again.';
+    } finally {
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+      btn.disabled = false;
+    }
+  }
+
+  /* ---- TERMS & CONDITIONS TOAST ---- */
+  function showTerms() {
+    showToast('Terms: All services are custom. Refunds subject to review. Content © Parallel Frames.');
+  }
+
+  /* ---- SCROLL REVEAL ---- */
+  const revealEls = document.querySelectorAll('.reveal');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = (i * 0.05) + 's';
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ---- NAVBAR SCROLL SHADOW ---- */
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 20) {
+      nav.style.boxShadow = '0 4px 32px rgba(0,0,0,.4)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+
+  /* ---- ENTER KEY SUBMIT ---- */
+  document.getElementById('msg').addEventListener('keydown', e => {
+    if (e.key === 'Enter' && e.ctrlKey) sendMessage();
+  });
+</script>
 </body>
 </html>
