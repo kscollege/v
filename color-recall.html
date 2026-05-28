@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Recall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CSS RESET & VARIABLES
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #000;
+  --surface: rgba(255,255,255,0.03);
+  --surface-hover: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.08);
+  --border-bright: rgba(255,255,255,0.18);
+  --text-primary: #fff;
+  --text-secondary: rgba(255,255,255,0.45);
+  --text-dim: rgba(255,255,255,0.2);
+  --accent: #fff;
+  --glow: rgba(255,255,255,0.12);
+  --danger: #ff3b3b;
+  --gold: #f5c842;
+  --silver: #c0c0c0;
+  --bronze: #cd7f32;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --transition: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html { font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  cursor: default;
+  user-select: none;
+}
+
+/* ============================================================
+   NOISE GRAIN OVERLAY
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+/* ============================================================
+   SCREENS (all hidden by default)
+   ============================================================ */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s var(--transition), transform 0.6s var(--transition);
+  transform: translateY(12px);
+  padding: 20px;
+}
+.screen.active {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+.screen.exit {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+
+/* ============================================================
+   INTRO SCREEN
+   ============================================================ */
+#screen-intro {
+  flex-direction: column;
+  text-align: center;
+  gap: 0;
+}
+
+.intro-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 32px;
+  animation: fadeUp 1s 0.2s both;
+}
+
+.intro-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(88px, 18vw, 180px);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  animation: fadeUp 1s 0.4s both;
+  position: relative;
+}
+.intro-title span {
+  display: block;
+  background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.55) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.intro-subtitle {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  margin-top: 28px;
+  letter-spacing: 0.02em;
+  animation: fadeUp 1s 0.6s both;
+  max-width: 320px;
+}
+
+.intro-actions {
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: fadeUp 1s 0.8s both;
+}
+
+.btn-primary {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 16px 52px;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s var(--transition), box-shadow 0.2s var(--transition), background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.btn-primary:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 40px rgba(255,255,255,0.25);
+}
+.btn-primary:hover::after { opacity: 1; }
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 12px 32px;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s var(--transition);
+}
+.btn-ghost:hover {
+  border-color: var(--border-bright);
+  color: var(--text-primary);
+  background: var(--surface-hover);
+}
+
+.highscore-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+.highscore-badge span { color: var(--gold); }
+
+.intro-dots {
+  display: flex;
+  gap: 6px;
+  margin-top: 48px;
+  animation: fadeUp 1s 1s both;
+}
+.intro-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--border-bright);
+}
+
+/* ============================================================
+   MEMORIZE SCREEN
+   ============================================================ */
+#screen-memorize {
+  flex-direction: column;
+  gap: 0;
+}
+
+.memorize-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 28px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.round-indicator {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.round-pip {
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border);
+  transition: background 0.4s, width 0.4s;
+}
+.round-pip.done { background: rgba(255,255,255,0.5); }
+.round-pip.active { background: #fff; width: 32px; }
+
+.round-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* Big color display */
+.color-display-wrap {
+  width: min(520px, 90vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.color-card {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s var(--transition);
+  box-shadow: 0 0 80px rgba(0,0,0,0.8), 0 0 0 1px var(--border);
+}
+.color-card-inner {
+  width: 100%;
+  height: 100%;
+  transition: background 0.3s;
+}
+
+/* Countdown ring */
+.countdown-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.countdown-ring-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+.countdown-ring-bg {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 2;
+}
+.countdown-ring-fg {
+  fill: none;
+  stroke: rgba(255,255,255,0.6);
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.9s linear;
+}
+.countdown-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.memorize-hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ============================================================
+   RECREATE SCREEN (HSL Sliders)
+   ============================================================ */
+#screen-recreate {
+  flex-direction: column;
+  gap: 0;
+}
+
+.recreate-layout {
+  width: min(560px, 95vw);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.recreate-header-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.preview-strip {
+  width: 100%;
+  height: 100px;
+  border-radius: var(--radius);
+  background: hsl(0, 70%, 55%);
+  transition: background 0.05s;
+  box-shadow: 0 0 60px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.preview-strip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Slider panel */
+.sliders-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  backdrop-filter: blur(20px);
+}
+
+.slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.slider-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.slider-key-hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+
+/* Custom slider */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+  position: relative;
+}
+.slider-track-wrap {
+  position: relative;
+  height: 6px;
+  border-radius: 3px;
+  overflow: visible;
+}
+.slider-track {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+input[type=range].hue-slider {
+  background: linear-gradient(to right,
+    hsl(0,80%,55%), hsl(30,80%,55%), hsl(60,80%,55%), hsl(90,80%,55%),
+    hsl(120,80%,55%), hsl(150,80%,55%), hsl(180,80%,55%), hsl(210,80%,55%),
+    hsl(240,80%,55%), hsl(270,80%,55%), hsl(300,80%,55%), hsl(330,80%,55%), hsl(360,80%,55%));
+}
+input[type=range].sat-slider { /* set inline via JS */ }
+input[type=range].lit-slider { /* set inline via JS */ }
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid rgba(0,0,0,0.3);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.15), 0 2px 12px rgba(0,0,0,0.5);
+  transition: box-shadow 0.15s, transform 0.15s;
+  cursor: pointer;
+}
+input[type=range]:hover::-webkit-slider-thumb,
+input[type=range]:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 5px rgba(255,255,255,0.2), 0 2px 16px rgba(0,0,0,0.6);
+  transform: scale(1.15);
+}
+input[type=range]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid rgba(0,0,0,0.3);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.15);
+  cursor: pointer;
+}
+
+.submit-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   SCORE REVEAL SCREEN
+   ============================================================ */
+#screen-score {
+  flex-direction: column;
+  gap: 32px;
+  text-align: center;
+}
+
+.score-reveal-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  width: min(480px, 95vw);
+}
+
+/* Split color card */
+.split-card {
+  width: 100%;
+  height: 180px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 60px rgba(0,0,0,0.7), 0 0 0 1px var(--border);
+}
+.split-half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+}
+.split-half.left { left: 0; clip-path: polygon(0 0, 100% 0, 75% 100%, 0 100%); }
+.split-half.right { right: 0; clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 100%); }
+.split-label {
+  position: absolute;
+  bottom: 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.split-label.left { left: 16px; }
+.split-label.right { right: 16px; }
+.split-divider {
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: rgba(0,0,0,0.5);
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+/* Score number */
+.score-number-reveal {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 100px;
+  line-height: 0.85;
+  letter-spacing: 0.01em;
+  animation: scoreIn 0.6s 0.3s var(--transition) both;
+}
+.score-number-reveal .denom {
+  font-size: 36px;
+  color: var(--text-dim);
+}
+
+.score-verdict {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.score-detail-row {
+  display: flex;
+  gap: 24px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+}
+.score-detail-item { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.score-detail-item strong { color: var(--text-secondary); font-size: 13px; }
+
+/* ============================================================
+   FINAL RESULTS SCREEN
+   ============================================================ */
+#screen-results {
+  flex-direction: column;
+  overflow-y: auto;
+  align-items: center;
+  padding: 80px 20px;
+  min-height: 100vh;
+}
+#screen-results.active { overflow-y: auto; }
+
+.results-wrap {
+  width: min(600px, 95vw);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 20px 0;
+}
+
+.results-rank-hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.rank-badge {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.3em;
+  padding: 6px 20px;
+  border-radius: 100px;
+  display: inline-block;
+  text-transform: uppercase;
+}
+.rank-S  { background: linear-gradient(135deg,#f5c842,#ff9500); color: #000; }
+.rank-A  { background: linear-gradient(135deg,#34c759,#00c7be); color: #000; }
+.rank-B  { background: linear-gradient(135deg,#007aff,#5856d6); color: #fff; }
+.rank-C  { background: linear-gradient(135deg,#ff9f0a,#ff6b35); color: #000; }
+.rank-D  { background: linear-gradient(135deg,#ff3b30,#c73b3b); color: #fff; }
+
+.results-total-score {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 15vw, 140px);
+  line-height: 0.85;
+  letter-spacing: -0.01em;
+}
+.results-total-score .denom { font-size: 0.35em; color: var(--text-dim); }
+
+.results-accuracy {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--text-secondary);
+  letter-spacing: 0.15em;
+}
+
+/* Stats bar */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.stat-cell {
+  background: var(--surface);
+  padding: 20px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  backdrop-filter: blur(20px);
+}
+.stat-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Round cards */
+.round-cards-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.round-cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.round-card-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: border-color 0.2s;
+  animation: fadeUp 0.5s both;
+}
+.round-card-item:hover { border-color: var(--border-bright); }
+
+.round-card-swatch {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+.round-card-swatch-orig { position: absolute; inset: 0; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.round-card-swatch-user { position: absolute; inset: 0; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+
+.round-card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.round-card-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.round-card-bar-wrap {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.round-card-bar {
+  height: 100%;
+  border-radius: 2px;
+  background: #fff;
+  transition: width 1s var(--transition);
+}
+
+.round-card-score {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.results-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.highscore-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.15em;
+}
+
+/* ============================================================
+   TRANSITIONS & OVERLAYS
+   ============================================================ */
+.flash-overlay {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+  transition: opacity 0.15s;
+}
+.flash-overlay.flash { opacity: 0.04; }
+
+/* Bg ambient glow */
+#ambient-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  transition: background 1s ease;
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scoreIn {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes ringPulse {
+  0%, 100% { transform: translate(-50%,-50%) rotate(-90deg) scale(1); }
+  50% { transform: translate(-50%,-50%) rotate(-90deg) scale(1.04); }
+}
+@keyframes colorShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+  .memorize-header { padding: 20px 24px; }
+  .sliders-panel { padding: 20px; }
+  .stats-bar { grid-template-columns: repeat(3, 1fr); }
+  .split-card { height: 140px; }
+}
+
+/* focus styles */
+input[type=range]:focus { outline: none; }
+button:focus-visible { outline: 2px solid rgba(255,255,255,0.4); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<!-- Ambient background glow -->
+<div id="ambient-glow"></div>
+<div class="flash-overlay" id="flash-overlay"></div>
+
+<!-- ============================================================
+     SCREEN 1: INTRO
+     ============================================================ -->
+<div class="screen active" id="screen-intro">
+  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;">
+    <div class="intro-eyebrow">A color perception game</div>
+    <div class="intro-title">
+      <span>Color</span>
+      <span>Recall</span>
+    </div>
+    <div class="intro-subtitle">How accurately can you remember a color after 5 seconds?</div>
+    <div class="intro-actions">
+      <button class="btn-primary" id="btn-start" onclick="startGame()">Begin Challenge</button>
+      <div class="highscore-badge">Best Score: <span id="hs-display">—</span></div>
+    </div>
+    <div class="intro-dots">
+      <div class="intro-dot"></div>
+      <div class="intro-dot"></div>
+      <div class="intro-dot"></div>
+      <div class="intro-dot"></div>
+      <div class="intro-dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 2: MEMORIZE
+     ============================================================ -->
+<div class="screen" id="screen-memorize">
+  <!-- Fixed header -->
+  <div class="memorize-header">
+    <div class="round-indicator" id="round-pips"></div>
+    <div class="round-label" id="round-label-text">Round 1 of 5</div>
+  </div>
+
+  <div class="color-display-wrap">
+    <div class="color-card" id="color-card">
+      <div class="color-card-inner" id="color-card-inner"></div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-wrap">
+      <svg class="countdown-ring-svg" width="80" height="80" viewBox="0 0 80 80">
+        <circle class="countdown-ring-bg" cx="40" cy="40" r="36"/>
+        <circle class="countdown-ring-fg" id="countdown-ring" cx="40" cy="40" r="36"
+          stroke-dasharray="226.2" stroke-dashoffset="0"/>
+      </svg>
+      <div class="countdown-number" id="countdown-num">5</div>
+    </div>
+
+    <div class="memorize-hint">Memorize this color</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 3: RECREATE
+     ============================================================ -->
+<div class="screen" id="screen-recreate">
+  <!-- Fixed header -->
+  <div class="memorize-header">
+    <div class="round-indicator" id="round-pips-2"></div>
+    <div class="round-label" id="round-label-text-2">Round 1 of 5</div>
+  </div>
+
+  <div class="recreate-layout">
+    <div class="recreate-header-label">Recreate the color</div>
+
+    <!-- Live preview -->
+    <div class="preview-strip" id="preview-strip"></div>
+
+    <!-- Sliders -->
+    <div class="sliders-panel">
+      <div class="slider-row" id="slider-hue-row">
+        <div class="slider-label">
+          <span class="slider-name">Hue</span>
+          <span class="slider-key-hint">← → arrows</span>
+        </div>
+        <input type="range" class="hue-slider" id="sl-hue" min="0" max="360" value="180">
+      </div>
+
+      <div class="slider-row" id="slider-sat-row">
+        <div class="slider-label">
+          <span class="slider-name">Saturation</span>
+          <span class="slider-key-hint">S / W keys</span>
+        </div>
+        <input type="range" class="sat-slider" id="sl-sat" min="0" max="100" value="70">
+      </div>
+
+      <div class="slider-row" id="slider-lit-row">
+        <div class="slider-label">
+          <span class="slider-name">Lightness</span>
+          <span class="slider-key-hint">A / D keys</span>
+        </div>
+        <input type="range" class="lit-slider" id="sl-lit" min="0" max="100" value="55">
+      </div>
+    </div>
+
+    <div class="submit-row">
+      <button class="btn-primary" onclick="submitGuess()" id="btn-submit">
+        Submit — Enter ↵
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 4: SCORE REVEAL
+     ============================================================ -->
+<div class="screen" id="screen-score">
+  <div class="score-reveal-wrap">
+    <div class="recreate-header-label" id="score-round-label">Round 1</div>
+
+    <!-- Split color comparison -->
+    <div class="split-card" id="split-card">
+      <div class="split-half left" id="split-orig"></div>
+      <div class="split-half right" id="split-user"></div>
+      <div class="split-divider"></div>
+      <div class="split-label left">Original</div>
+      <div class="split-label right">Yours</div>
+    </div>
+
+    <!-- Big score -->
+    <div class="score-number-reveal" id="score-number-reveal">
+      0<span class="denom">/10</span>
+    </div>
+    <div class="score-verdict" id="score-verdict">Calculating...</div>
+
+    <!-- HSL diff details -->
+    <div class="score-detail-row" id="score-detail-row">
+      <div class="score-detail-item">
+        <span>Hue Δ</span>
+        <strong id="sd-hue">—</strong>
+      </div>
+      <div class="score-detail-item">
+        <span>Sat Δ</span>
+        <strong id="sd-sat">—</strong>
+      </div>
+      <div class="score-detail-item">
+        <span>Lit Δ</span>
+        <strong id="sd-lit">—</strong>
+      </div>
+    </div>
+
+    <button class="btn-primary" id="btn-next" onclick="nextRound()" style="margin-top:8px;">
+      Continue →
+    </button>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 5: FINAL RESULTS
+     ============================================================ -->
+<div class="screen" id="screen-results">
+  <div class="results-wrap">
+    <!-- Rank hero -->
+    <div class="results-rank-hero">
+      <div class="rank-badge" id="rank-badge">S</div>
+      <div class="results-total-score" id="results-total">
+        0<span class="denom">/50</span>
+      </div>
+      <div class="results-accuracy" id="results-accuracy-text">0% accuracy</div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="stats-bar">
+      <div class="stat-cell">
+        <div class="stat-value" id="stat-best">0</div>
+        <div class="stat-label">Best Round</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value" id="stat-avg">0</div>
+        <div class="stat-label">Average</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value" id="stat-worst">0</div>
+        <div class="stat-label">Worst Round</div>
+      </div>
+    </div>
+
+    <!-- Round breakdown -->
+    <div class="round-cards-title">Round Breakdown</div>
+    <div class="round-cards-grid" id="round-cards-grid"></div>
+
+    <!-- Actions -->
+    <div class="results-actions">
+      <button class="btn-primary" onclick="resetGame()">Play Again</button>
+      <div class="highscore-note" id="results-hs-note"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   AUDIO ENGINE
+   ============================================================ */
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let ctx = null;
+
+function getAudioCtx() {
+  if (!ctx) ctx = new AudioCtx();
+  return ctx;
+}
+
+function playTone(freq, type, duration, gain = 0.18, delayMs = 0) {
+  try {
+    const ac = getAudioCtx();
+    setTimeout(() => {
+      const osc = ac.createOscillator();
+      const g   = ac.createGain();
+      osc.connect(g);
+      g.connect(ac.destination);
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, ac.currentTime);
+      g.gain.setValueAtTime(0, ac.currentTime);
+      g.gain.linearRampToValueAtTime(gain, ac.currentTime + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + duration);
+      osc.start(ac.currentTime);
+      osc.stop(ac.currentTime + duration);
+    }, delayMs);
+  } catch(e) {}
+}
+
+function sfxStart()    { playTone(440, 'sine', 0.3); playTone(660, 'sine', 0.3, 0.1, 80); }
+function sfxReveal()   { playTone(523, 'sine', 0.4, 0.15); }
+function sfxTick(n)    { playTone(200 + n * 40, 'square', 0.08, 0.04); }
+function sfxSubmit()   { playTone(880, 'sine', 0.2, 0.15); }
+function sfxScore(s)   {
+  const f = 300 + s * 60;
+  playTone(f, 'sine', 0.25, 0.14);
+  playTone(f * 1.5, 'sine', 0.3, 0.09, 100);
+}
+function sfxPerfect()  {
+  [523,659,784,1047].forEach((f,i) => playTone(f,'sine',0.3,0.12,i*80));
+}
+function sfxFinale()   {
+  [261,330,392,523,659].forEach((f,i) => playTone(f,'triangle',0.5,0.1,i*100));
+}
+
+/* ============================================================
+   GAME STATE
+   ============================================================ */
+const TOTAL_ROUNDS = 5;
+const MEMORIZE_SECS = 5;
+const CIRCUMFERENCE = 2 * Math.PI * 36; // 226.2
+
+let state = {
+  round: 0,
+  colors: [],      // { h, s, l } original colors
+  guesses: [],     // { h, s, l } user guesses
+  scores: [],      // numeric scores per round
+  activeSlider: 'hue',
+  countdownTimer: null,
+  countdownVal: MEMORIZE_SECS,
+};
+
+/* ============================================================
+   COLOR GENERATION
+   ============================================================ */
+function generateColors(n) {
+  const colors = [];
+  // Use golden-angle hue distribution for variety
+  const goldenAngle = 137.508;
+  const startHue = Math.random() * 360;
+  for (let i = 0; i < n; i++) {
+    const h = Math.round((startHue + i * goldenAngle) % 360);
+    const s = Math.round(55 + Math.random() * 35); // 55–90%
+    const l = Math.round(38 + Math.random() * 28); // 38–66%
+    colors.push({ h, s, l });
+  }
+  return colors;
+}
+
+function hslStr(h, s, l) { return `hsl(${h}, ${s}%, ${l}%)`; }
+
+/* ============================================================
+   SCREEN TRANSITIONS
+   ============================================================ */
+let currentScreen = 'screen-intro';
+
+function transitionTo(targetId, delay = 0) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      const current = document.querySelector('.screen.active');
+      const target  = document.getElementById(targetId);
+      if (current) {
+        current.classList.add('exit');
+        current.classList.remove('active');
+        setTimeout(() => current.classList.remove('exit'), 700);
+      }
+      setTimeout(() => {
+        target.classList.add('active');
+        currentScreen = targetId;
+        resolve();
+      }, 120);
+    }, delay);
+  });
+}
+
+/* ============================================================
+   AMBIENT GLOW
+   ============================================================ */
+function setAmbient(h, s, l, opacity = 0.25) {
+  const glow = document.getElementById('ambient-glow');
+  glow.style.background = `radial-gradient(ellipse 80% 60% at 50% 50%, hsla(${h},${s}%,${l}%,${opacity}) 0%, transparent 70%)`;
+}
+function clearAmbient() {
+  document.getElementById('ambient-glow').style.background = 'none';
+}
+
+/* ============================================================
+   FLASH EFFECT
+   ============================================================ */
+function flash() {
+  const el = document.getElementById('flash-overlay');
+  el.classList.add('flash');
+  setTimeout(() => el.classList.remove('flash'), 200);
+}
+
+/* ============================================================
+   HIGH SCORE
+   ============================================================ */
+function getHighScore() {
+  return parseFloat(localStorage.getItem('color-recall-hs') || '0');
+}
+function saveHighScore(score) {
+  if (score > getHighScore()) {
+    localStorage.setItem('color-recall-hs', score.toString());
+    return true;
+  }
+  return false;
+}
+function refreshHsDisplay() {
+  const hs = getHighScore();
+  document.getElementById('hs-display').textContent = hs > 0 ? hs.toFixed(2) : '—';
+}
+
+/* ============================================================
+   ROUND PIPS
+   ============================================================ */
+function renderPips(containerId, round) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  for (let i = 0; i < TOTAL_ROUNDS; i++) {
+    const pip = document.createElement('div');
+    pip.className = 'round-pip' +
+      (i < round ? ' done' : '') +
+      (i === round ? ' active' : '');
+    el.appendChild(pip);
+  }
+}
+
+/* ============================================================
+   SCORING ALGORITHM
+   ============================================================ */
+function calcScore(orig, guess) {
+  // Hue: circular distance (max 180 apart)
+  let dH = Math.abs(orig.h - guess.h);
+  if (dH > 180) dH = 360 - dH;
+  const huePenalty = dH / 180; // 0–1
+
+  // Saturation & Lightness: linear distance
+  const satPenalty = Math.abs(orig.s - guess.s) / 100;
+  const litPenalty = Math.abs(orig.l - guess.l) / 100;
+
+  // Weighted: hue counts most
+  const totalPenalty = huePenalty * 0.55 + satPenalty * 0.25 + litPenalty * 0.20;
+  // Score is 10 * (1 - penalty^0.55) for nice curve
+  const raw = 10 * (1 - Math.pow(totalPenalty, 0.55));
+  return Math.max(0, Math.round(raw * 100) / 100);
+}
+
+function getVerdict(score) {
+  if (score >= 9.5)  return 'Extraordinary';
+  if (score >= 8.5)  return 'Excellent';
+  if (score >= 7.5)  return 'Great';
+  if (score >= 6)    return 'Good';
+  if (score >= 4)    return 'Average';
+  return 'Keep practicing';
+}
+
+function getRank(total) {
+  const pct = total / 50;
+  if (pct >= 0.95) return 'S';
+  if (pct >= 0.85) return 'A';
+  if (pct >= 0.70) return 'B';
+  if (pct >= 0.55) return 'C';
+  return 'D';
+}
+
+/* ============================================================
+   GAME INIT
+   ============================================================ */
+function startGame() {
+  sfxStart();
+  state.round  = 0;
+  state.colors = generateColors(TOTAL_ROUNDS);
+  state.guesses = [];
+  state.scores  = [];
+  runRound();
+}
+
+function resetGame() {
+  refreshHsDisplay();
+  transitionTo('screen-intro');
+}
+
+/* ============================================================
+   ROUND FLOW
+   ============================================================ */
+function runRound() {
+  const r = state.round;
+  const color = state.colors[r];
+
+  // Update headers
+  renderPips('round-pips', r);
+  renderPips('round-pips-2', r);
+  document.getElementById('round-label-text').textContent  = `Round ${r+1} of ${TOTAL_ROUNDS}`;
+  document.getElementById('round-label-text-2').textContent = `Round ${r+1} of ${TOTAL_ROUNDS}`;
+
+  // Set color card
+  const inner = document.getElementById('color-card-inner');
+  inner.style.background = hslStr(color.h, color.s, color.l);
+
+  // Set ambient glow
+  setAmbient(color.h, color.s, color.l, 0.3);
+
+  transitionTo('screen-memorize').then(() => {
+    sfxReveal();
+    startCountdown();
+  });
+}
+
+function startCountdown() {
+  state.countdownVal = MEMORIZE_SECS;
+  const ring  = document.getElementById('countdown-ring');
+  const numEl = document.getElementById('countdown-num');
+
+  ring.style.strokeDashoffset = '0';
+  numEl.textContent = MEMORIZE_SECS;
+
+  if (state.countdownTimer) clearInterval(state.countdownTimer);
+
+  let elapsed = 0;
+  const INTERVAL = 50; // ms
+  const TOTAL_MS = MEMORIZE_SECS * 1000;
+
+  state.countdownTimer = setInterval(() => {
+    elapsed += INTERVAL;
+    const progress = elapsed / TOTAL_MS;
+    const offset = CIRCUMFERENCE * progress;
+    ring.style.strokeDashoffset = offset;
+
+    const remaining = Math.ceil((TOTAL_MS - elapsed) / 1000);
+    if (remaining !== state.countdownVal) {
+      state.countdownVal = remaining;
+      numEl.textContent = remaining;
+      sfxTick(remaining);
+    }
+
+    if (elapsed >= TOTAL_MS) {
+      clearInterval(state.countdownTimer);
+      state.countdownTimer = null;
+      goToRecreate();
+    }
+  }, INTERVAL);
+}
+
+function goToRecreate() {
+  // Randomize slider starting positions (so user can't just leave at same place)
+  document.getElementById('sl-hue').value = Math.round(Math.random() * 360);
+  document.getElementById('sl-sat').value = Math.round(20 + Math.random() * 60);
+  document.getElementById('sl-lit').value = Math.round(30 + Math.random() * 40);
+  updatePreview();
+  clearAmbient();
+  transitionTo('screen-recreate');
+}
+
+/* ============================================================
+   SLIDERS & PREVIEW
+   ============================================================ */
+function updatePreview() {
+  const h = document.getElementById('sl-hue').value;
+  const s = document.getElementById('sl-sat').value;
+  const l = document.getElementById('sl-lit').value;
+  const c = hslStr(h, s, l);
+  document.getElementById('preview-strip').style.background = c;
+
+  // Update saturation slider gradient
+  const satSlider = document.getElementById('sl-sat');
+  satSlider.style.background = `linear-gradient(to right, hsl(${h},0%,${l}%), hsl(${h},100%,${l}%))`;
+
+  // Update lightness slider gradient
+  const litSlider = document.getElementById('sl-lit');
+  litSlider.style.background = `linear-gradient(to right, hsl(${h},${s}%,0%), hsl(${h},${s}%,50%), hsl(${h},${s}%,100%))`;
+
+  setAmbient(h, s, l, 0.18);
+}
+
+['sl-hue','sl-sat','sl-lit'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updatePreview);
+});
+
+// Init preview on page load
+updatePreview();
+
+/* ============================================================
+   SUBMIT GUESS
+   ============================================================ */
+function submitGuess() {
+  sfxSubmit();
+  flash();
+
+  const h = parseInt(document.getElementById('sl-hue').value);
+  const s = parseInt(document.getElementById('sl-sat').value);
+  const l = parseInt(document.getElementById('sl-lit').value);
+  const guess = { h, s, l };
+  state.guesses.push(guess);
+
+  const orig  = state.colors[state.round];
+  const score = calcScore(orig, guess);
+  state.scores.push(score);
+
+  showScoreReveal(orig, guess, score);
+}
+
+/* ============================================================
+   SCORE REVEAL
+   ============================================================ */
+function showScoreReveal(orig, guess, score) {
+  // Split card
+  document.getElementById('split-orig').style.background = hslStr(orig.h, orig.s, orig.l);
+  document.getElementById('split-user').style.background = hslStr(guess.h, guess.s, guess.l);
+
+  // Score
+  document.getElementById('score-round-label').textContent = `Round ${state.round + 1}`;
+
+  // Animate score counting up
+  const numEl  = document.getElementById('score-number-reveal');
+  numEl.innerHTML = `0<span class="denom">/10</span>`;
+  let current = 0;
+  const target = score;
+  const steps = 40;
+  const increment = target / steps;
+  let step = 0;
+  const countUp = setInterval(() => {
+    step++;
+    current = Math.min(target, step * increment);
+    numEl.innerHTML = `${current.toFixed(2)}<span class="denom">/10</span>`;
+    if (step >= steps) clearInterval(countUp);
+  }, 20);
+
+  document.getElementById('score-verdict').textContent = getVerdict(score);
+
+  // HSL deltas
+  let dH = Math.abs(orig.h - guess.h);
+  if (dH > 180) dH = 360 - dH;
+  document.getElementById('sd-hue').textContent = `${dH}°`;
+  document.getElementById('sd-sat').textContent = `${Math.abs(orig.s - guess.s)}%`;
+  document.getElementById('sd-lit').textContent = `${Math.abs(orig.l - guess.l)}%`;
+
+  // Sounds
+  setTimeout(() => {
+    sfxScore(score);
+    if (score >= 9.8) sfxPerfect();
+  }, 400);
+
+  setAmbient(orig.h, orig.s, orig.l, 0.2);
+
+  // Update button text
+  const nextBtn = document.getElementById('btn-next');
+  nextBtn.textContent = state.round < TOTAL_ROUNDS - 1 ? 'Continue →' : 'See Results →';
+
+  transitionTo('screen-score');
+}
+
+/* ============================================================
+   NEXT ROUND / FINAL RESULTS
+   ============================================================ */
+function nextRound() {
+  state.round++;
+  clearAmbient();
+
+  if (state.round >= TOTAL_ROUNDS) {
+    showFinalResults();
+  } else {
+    runRound();
+  }
+}
+
+function showFinalResults() {
+  sfxFinale();
+  clearAmbient();
+
+  const total = state.scores.reduce((a, b) => a + b, 0);
+  const totalRounded = Math.round(total * 100) / 100;
+  const accuracy = Math.round((total / 50) * 100);
+  const rank = getRank(total);
+
+  // Total score (animated)
+  const totEl = document.getElementById('results-total');
+  totEl.innerHTML = `${totalRounded.toFixed(2)}<span class="denom">/50</span>`;
+
+  document.getElementById('results-accuracy-text').textContent = `${accuracy}% accuracy`;
+
+  // Rank badge
+  const badge = document.getElementById('rank-badge');
+  badge.textContent = rank;
+  badge.className = `rank-badge rank-${rank}`;
+
+  // Stats
+  const best  = Math.max(...state.scores);
+  const worst = Math.min(...state.scores);
+  const avg   = total / state.scores.length;
+  document.getElementById('stat-best').textContent  = best.toFixed(1);
+  document.getElementById('stat-avg').textContent   = avg.toFixed(1);
+  document.getElementById('stat-worst').textContent = worst.toFixed(1);
+
+  // Round breakdown cards
+  const grid = document.getElementById('round-cards-grid');
+  grid.innerHTML = '';
+  state.scores.forEach((score, i) => {
+    const orig  = state.colors[i];
+    const guess = state.guesses[i];
+    const item  = document.createElement('div');
+    item.className = 'round-card-item';
+    item.style.animationDelay = `${i * 0.08}s`;
+    const barWidth = Math.round(score / 10 * 100);
+    item.innerHTML = `
+      <div class="round-card-swatch">
+        <div class="round-card-swatch-orig" style="background:${hslStr(orig.h,orig.s,orig.l)}"></div>
+        <div class="round-card-swatch-user" style="background:${hslStr(guess.h,guess.s,guess.l)}"></div>
+      </div>
+      <div class="round-card-info">
+        <div class="round-card-label">Round ${i+1}</div>
+        <div class="round-card-bar-wrap">
+          <div class="round-card-bar" style="width:0%" data-width="${barWidth}%"></div>
+        </div>
+      </div>
+      <div class="round-card-score">${score.toFixed(2)}</div>
+    `;
+    grid.appendChild(item);
+  });
+
+  // Animate bars after render
+  setTimeout(() => {
+    grid.querySelectorAll('.round-card-bar').forEach(bar => {
+      bar.style.width = bar.dataset.width;
+    });
+  }, 300);
+
+  // High score
+  const isNew = saveHighScore(totalRounded);
+  const noteEl = document.getElementById('results-hs-note');
+  if (isNew) {
+    noteEl.textContent = '🏆 New personal best!';
+    noteEl.style.color = 'var(--gold)';
+  } else {
+    const hs = getHighScore();
+    noteEl.textContent = `Best: ${hs.toFixed(2)} / 50`;
+    noteEl.style.color = '';
+  }
+
+  refreshHsDisplay();
+  transitionTo('screen-results');
+}
+
+/* ============================================================
+   KEYBOARD SUPPORT
+   ============================================================ */
+document.addEventListener('keydown', e => {
+  if (currentScreen === 'screen-recreate') {
+    const hue = document.getElementById('sl-hue');
+    const sat = document.getElementById('sl-sat');
+    const lit = document.getElementById('sl-lit');
+
+    switch(e.key) {
+      case 'Enter':
+        e.preventDefault();
+        submitGuess();
+        break;
+      case 'ArrowLeft':
+        e.preventDefault();
+        hue.value = Math.max(0, parseInt(hue.value) - 2);
+        updatePreview();
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        hue.value = Math.min(360, parseInt(hue.value) + 2);
+        updatePreview();
+        break;
+      case 'ArrowUp':
+      case 'w':
+        e.preventDefault();
+        sat.value = Math.min(100, parseInt(sat.value) + 2);
+        updatePreview();
+        break;
+      case 'ArrowDown':
+      case 's':
+        e.preventDefault();
+        sat.value = Math.max(0, parseInt(sat.value) - 2);
+        updatePreview();
+        break;
+      case 'a':
+        e.preventDefault();
+        lit.value = Math.max(0, parseInt(lit.value) - 2);
+        updatePreview();
+        break;
+      case 'd':
+        e.preventDefault();
+        lit.value = Math.min(100, parseInt(lit.value) + 2);
+        updatePreview();
+        break;
+    }
+  }
+
+  if (currentScreen === 'screen-score' && e.key === 'Enter') {
+    e.preventDefault();
+    nextRound();
+  }
+
+  if (currentScreen === 'screen-intro' && e.key === 'Enter') {
+    e.preventDefault();
+    startGame();
+  }
+});
+
+/* ============================================================
+   INIT
+   ============================================================ */
+refreshHsDisplay();
+// Unlock audio on first interaction
+document.addEventListener('click', () => { try { getAudioCtx().resume(); } catch(e){} }, { once: true });
+</script>
+</body>
+</html>
