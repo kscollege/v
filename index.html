@@ -4453,7 +4453,7 @@ function renderData() {
         <tr><td style="color:var(--ink-muted)">Total Students</td><td style="font-family:'DM Mono',monospace">${TOTAL_STUDENTS}</td></tr>
         <tr><td style="color:var(--ink-muted)">Attendance Records</td><td style="font-family:'DM Mono',monospace">${getAttendanceDates().length} dates</td></tr>
         <tr><td style="color:var(--ink-muted)">Date Range</td><td style="font-family:'DM Mono',monospace">${getAttendanceDates().length?getAttendanceDates()[0]+' → '+getAttendanceDates().slice(-1)[0]:'—'}</td></tr>
-        <tr><td style="color:var(--ink-muted)">Storage</td><td><span class="badge badge-info">Supabase Storage · ${cloudStatus}</span></td></tr>
+        <tr><td style="color:var(--ink-muted)">Storage</td><td><span class="badge badge-info">Supabase · ${cloudStatus}</span></td></tr>
         <tr><td style="color:var(--ink-muted)">Audit Entries</td><td style="font-family:'DM Mono',monospace">${auditLog.length}</td></tr>
       </tbody>
     </table></div>
